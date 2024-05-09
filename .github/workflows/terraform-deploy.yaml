@@ -15,8 +15,7 @@ permissions:
   contents: read # This is required for actions/checkout
 env:
   AWS_REGION: "us-east-1"
-  ENVIROMENT_STAGE: $ {{ (github.ref == 'ref/head/main' && 'production') || (github.ref == 'red/head/staging' && 'staging') || 'dev' }}
-
+  ENVIRONMENT_STAGE: ${{ (github.ref == 'refs/heads/main' && 'production') || (github.ref == 'refs/heads/staging' && 'staging') || 'dev' }}
 ## job que se van a ejecutar
 jobs:
   terrform-deployment: # nombre del job
