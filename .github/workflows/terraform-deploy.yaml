@@ -39,3 +39,12 @@ jobs:
 
       - name: terraform init
         run: terraform init
+
+      - name: terraform fmt
+        run: terrform fmt -check
+
+      - name: terraform plan
+        run: terraform plan -input=false -var-file=vpc.tfvars
+
+      - name: terraform apply
+        run: terraform apply -auto-aprove -input=false -var-file=vpc.tfvars
