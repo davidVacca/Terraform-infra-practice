@@ -5,6 +5,7 @@ variable "cidr_block" {
 variable "tag_name" {
 }
 
+
 variable "cidr_block_public1" {
   type = string
 

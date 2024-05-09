@@ -1,0 +1,8 @@
+cidr_block          = "192.168.0.0/16"
+tag_name            = "aws_vpc_us_east_1"
+cidr_block_public1  = "192.168.21.0/24"
+cidr_block_public2  = "192.168.22.0/24"
+cidr_block_public3  = "192.168.23.0/24"
+cidr_block_private1 = "192.168.31.0/24"
+cidr_block_private2 = "192.168.32.0/24"
+cidr_block_private3 = "192.168.33.0/24"
