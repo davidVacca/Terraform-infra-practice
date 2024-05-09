@@ -22,7 +22,7 @@ jobs:
     defaults:
       run:
         working-directory: ./roots/Root_module
-
+        shell: bash
     steps:
       # this action clone the repository on the machine
       - name: Git clone the repository
@@ -38,4 +38,4 @@ jobs:
         # this part run the commands needeed to deploy de infra with CI/CD
 
       - name: terraform init
-        uses: terraform init
+        run: terraform init
