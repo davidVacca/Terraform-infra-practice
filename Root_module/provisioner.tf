@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket         = "Terraform-infra-practice-2024"
+    bucket         = "terraform-infra-practice-davidvacca"
     key            = "terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "terraform-state-lock"

@@ -1,8 +1,8 @@
-resource "aws_s3_bucket" "Terraform-infra-practice-2024" {
-  bucket = "Terraform-infra-practice-2024"
+resource "aws_s3_bucket" "terraform-infra-practice-davidvacca" {
+  bucket = "terraform-infra-practice-davidvacca"
 
   tags = {
-    Name        = "Terraform-infra-practice"
+    Name        = "Terraform-infra-practice-davidvacca"
     Environment = "Dev"
   }
   versioning {
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "Terraform-infra-practice-2024" {
 resource "aws_dynamodb_table" "terraform-state-lock" {
   name         = "terraform-state-lock"
   hash_key     = "LockID"
-  billing_mode = "PAY-PER-REQUEST"
+  billing_mode = "PAY_PER_REQUEST"
 
 
   attribute {
