@@ -1,0 +1,41 @@
+#nombre de pipeline
+name: "terraform deploy test"
+
+# cuando se va a ejecutar, cuando push la branch feature
+on:
+  push:
+    branches:
+      - "feature/**"
+
+#para conectarte con aws necesitas crear role y este role necesita ser anadido a la cuenta luego en la documentacion necesitan esta parte en el texto
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+env:
+  AWS_REGION: "us-east-1"
+
+## job que se van a ejecutar
+jobs:
+  terrform-deployment: # nombre del job
+    runs-on: ubuntu-latest # en que machine
+    # esta seccion se va aplicar en todos los pasos de aqui en adelante like before script in gitlab
+    defaults:
+      run:
+        working-directory: ./roots/Root_module
+
+    steps:
+      # this action clone the repository on the machine
+      - name: Git clone the repository
+        uses: actions/checkout@v4
+      # this action allow me to conect to my aws
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::099223796494:role/GitHubActionsTerraformIAMrole
+          role-session-name: GitHubActionsTerraformIAMrole
+          aws-region: ${{ env.AWS_REGION }}
+
+        # this part run the commands needeed to deploy de infra with CI/CD
+
+      - name: terraform init
+        uses: terraform init
