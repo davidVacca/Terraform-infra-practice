@@ -21,7 +21,7 @@ jobs:
     # esta seccion se va aplicar en todos los pasos de aqui en adelante like before script in gitlab
     defaults:
       run:
-        working-directory: ./roots/Root_module
+        working-directory: ../Root_module
         shell: bash
     steps:
       # this action clone the repository on the machine
