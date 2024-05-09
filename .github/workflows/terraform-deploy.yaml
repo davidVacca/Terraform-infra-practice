@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - "feature/**"
+      - "staging"
+      - "main"
 
 #para conectarte con aws necesitas crear role y este role necesita ser anadido a la cuenta luego en la documentacion necesitan esta parte en el texto
 permissions:
@@ -13,6 +15,7 @@ permissions:
   contents: read # This is required for actions/checkout
 env:
   AWS_REGION: "us-east-1"
+  ENVIROMENT_STAGE: $ {{ (github.ref == 'ref/head/main' && 'production') || (github.ref == 'red/head/staging' && 'staging') || 'dev' }}
 
 ## job que se van a ejecutar
 jobs:
@@ -23,6 +26,7 @@ jobs:
       run:
         working-directory: ./Root_module
         shell: bash
+    environment: ${{ (github.ref == 'ref/head/main' && 'production') || (github.ref == 'ref/head/staging' && 'staging') || 'dev'}}
     steps:
       # this action clone the repository on the machine
       - name: Git clone the repository
@@ -31,23 +35,22 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::099223796494:role/GitHubActionsTerraformIAMrole
+          role-to-assume: ${{ vars.IAM_ROLE }}
           role-session-name: GitHubActionsTerraformIAMrole
           aws-region: ${{ env.AWS_REGION }}
 
         # this part run the commands needeed to deploy de infra with CI/CD
 
       - name: terraform init
-        run: terraform init
+        run: terraform init -backend-config="bucket=project-david-state-bucket-${ENVIROMENT_STAGE}"
 
       - name: terraform fmt
         run: terraform fmt -check
 
       - name: terraform plan
-        run: terraform plan -input=false -var-file=vpc.tfvars
-
+        run: terraform plan -input=false -var-file=vpc_${ENVIROMENT_STAGE}.tfvars
       - name: terraform apply
-        run: terraform apply -auto-approve -input=false -var-file=vpc.tfvars
+        run: terraform apply -auto-approve -input=false -var-file=vpc_${ENVIROMENT_STAGE}.tfvars
 
       - name: terraform destroy
-        run: terraform destroy -var-file=vpc.tfvars -auto-approve
+        run: terraform destroy -var-file=vpc_${ENVIROMENT_STAGE}.tfvars -auto-approve
