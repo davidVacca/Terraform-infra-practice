@@ -1,8 +1,8 @@
-resource "aws_s3_bucket" "terraform-infra-practice-davidvacca" {
-  bucket = "terraform-infra-practice-davidvacca"
+resource "aws_s3_bucket" "project-david-state-bucket-dev" {
+  bucket = "project-david-state-bucket-dev"
 
   tags = {
-    Name        = "Terraform-infra-practice-davidvacca"
+    Name        = "project-x-state-bucket-dev"
     Environment = "Dev"
   }
   versioning {
