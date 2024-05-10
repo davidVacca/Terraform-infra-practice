@@ -1,5 +1,5 @@
 module "aws_vpc" {
-  source              = "../VPC_module"
+  source              = "../Child_module/VPC_module"
   cidr_block          = var.cidr_block
   tag_name            = var.tag_name
   cidr_block_public1  = var.cidr_block_public1
