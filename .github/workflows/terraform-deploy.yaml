@@ -41,7 +41,7 @@ jobs:
         # this part run the commands needeed to deploy de infra with CI/CD
 
       - name: terraform init
-        run: terraform init -backend-config="bucket=project-david-state-bucket-${ENVIRONMENT_STAGE}"
+        run: terraform init -backend-config="bucket=project-david-bucket-${ENVIRONMENT_STAGE}"
 
       - name: terraform fmt
         run: terraform fmt -check
