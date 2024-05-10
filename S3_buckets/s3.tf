@@ -1,8 +1,8 @@
-resource "aws_s3_bucket" "project-david-state-bucket-dev" {
-  bucket = "project-david-state-bucket-dev"
+resource "aws_s3_bucket" "project-david-bucket-dev" {
+  bucket = "project-david-bucket-dev"
 
   tags = {
-    Name        = "project-x-state-bucket-dev"
+    Name        = "project-david-bucket-dev"
     Environment = "Dev"
   }
   versioning {
