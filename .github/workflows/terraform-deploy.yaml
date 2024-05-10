@@ -49,5 +49,5 @@ jobs:
         run: terraform plan -input=false -var-file=vpc_${ENVIRONMENT_STAGE}.tfvars
       - name: terraform apply
         run: terraform apply -auto-approve -input=false -var-file=vpc_${ENVIRONMENT_STAGE}.tfvars
-#    - name: terraform destroy
-#       run: terraform destroy -var-file=vpc_${ENVIRONMENT_STAGE}.tfvars -auto-approve
+      - name: terraform destroy
+        run: terraform destroy -var-file=vpc_${ENVIRONMENT_STAGE}.tfvars -auto-approve
