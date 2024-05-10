@@ -41,15 +41,15 @@ jobs:
         # this part run the commands needeed to deploy de infra with CI/CD
 
       - name: terraform init
-        run: terraform init -backend-config="bucket=project-david-state-bucket-${ENVIROMENT_STAGE}"
+        run: terraform init -backend-config="bucket=project-david-state-bucket-dev"
 
       - name: terraform fmt
         run: terraform fmt -check
 
       - name: terraform plan
-        run: terraform plan -input=false -var-file=vpc_${ENVIROMENT_STAGE}.tfvars
+        run: terraform plan -input=false -var-file=vpc_dev.tfvars
       - name: terraform apply
-        run: terraform apply -auto-approve -input=false -var-file=vpc_${ENVIROMENT_STAGE}.tfvars
+        run: terraform apply -auto-approve -input=false -var-file=vpc_dev.tfvars
 
       - name: terraform destroy
-        run: terraform destroy -var-file=vpc_${ENVIROMENT_STAGE}.tfvars -auto-approve
+        run: terraform destroy -var-file=vpc_dev.tfvars -auto-approve
