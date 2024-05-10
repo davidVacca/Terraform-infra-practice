@@ -25,7 +25,7 @@ jobs:
       run:
         working-directory: ./Root_module
         shell: bash
-    environment: ${{ (github.ref == 'ref/head/main' && 'production') || (github.ref == 'ref/head/staging' && 'staging') || 'dev'}}
+    environment: ${{ (github.ref == 'refs/heads/main' && 'production') || (github.ref == 'refs/heads/staging' && 'staging') || 'dev' }}
     steps:
       # this action clone the repository on the machine
       - name: Git clone the repository
