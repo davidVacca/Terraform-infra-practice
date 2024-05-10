@@ -39,7 +39,6 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
         # this part run the commands needeed to deploy de infra with CI/CD
-
       - name: terraform init
         run: terraform init -backend-config="bucket=project-david-bucket-${ENVIRONMENT_STAGE}"
 
